@@ -10,10 +10,21 @@ public class PlayerController : MonoBehaviour
     public GameObject Door; 
     public bool hasKey = false;
 
+    public static PlayerController instance; //creating an object of the class to be findable 
+
     // Start is called before the first frame update
     void Start()
     {
-        //Door.SetActive(false);
+        //Door.SetActive(false);'
+
+        if (instance != null) //!= means not, we are checking if the instance is in the scene
+        {
+            Destroy(gameObject);
+            return;
+        }
+        instance = this;
+        GameObject.DontDestroyOnLoad(this.gameObject);
+        //ctrl+k+c crtl+k+u 
     }
 
     // Update is called once per frame
@@ -57,6 +68,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Door") && hasKey == true )
         {
             SceneManager.LoadScene("indoor");
+            transform.position = new Vector3(0.0f, 0.0f, 0.0f);
         }
         if (collision.gameObject.tag.Equals("Key"))
         {
@@ -72,9 +84,11 @@ public class PlayerController : MonoBehaviour
             hasKey = true;
 
         }
-        if (hasKey == false)
+        if (collision.gameObject.tag.Equals("Exit"))
         {
-            
+            Debug.Log("exit");
+            SceneManager.LoadScene("Main");
+            hasKey = false; 
         }
     }
 
