@@ -92,7 +92,7 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("obtained key");
             //key disappears
-            Key.SetActive(false);
+            //Key.SetActive(false);
 
             //activate door
 
