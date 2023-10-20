@@ -7,17 +7,21 @@ public class PlayerController : MonoBehaviour
 {
     public float Speed = 0.5f;
     public GameObject Key;
-    public GameObject Door; 
+    public GameObject Door;
+    public GameObject NPCText;
+    public GameObject Chest; 
     public bool hasKey = false;
     public Animator animator;
     public Rigidbody2D rb;
     public static PlayerController instance; //creating an object of the class to be findable 
     Vector2 movement;
 
+
     // Start is called before the first frame update
     void Start()
     {
-        //Door.SetActive(false);'
+        //Door.SetActive(false);
+        NPCText.SetActive(false);
 
         if (instance != null) //!= means not, we are checking if the instance is in the scene
         {
@@ -88,6 +92,9 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("indoor");
             transform.position = new Vector3(0.0f, 0.0f, 0.0f);
         }
+        else {
+            NPCText.SetActive(true);
+        }
         if (collision.gameObject.tag.Equals("Key"))
         {
             Debug.Log("obtained key");
@@ -108,6 +115,7 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Main");
             hasKey = false;
         }
+       
     }
 
 }
