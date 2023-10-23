@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour
     public GameObject Key;
     public GameObject Door;
     public GameObject NPCText;
-    public GameObject Chest; 
+    public GameObject Chest;
+    public bool chestOpen = false; 
+    public GameObject keyDisplay;
     public bool hasKey = false;
     public Animator animator;
     public Rigidbody2D rb;
@@ -22,6 +24,7 @@ public class PlayerController : MonoBehaviour
     {
         //Door.SetActive(false);
         NPCText.SetActive(false);
+        keyDisplay.SetActive(false);
 
         if (instance != null) //!= means not, we are checking if the instance is in the scene
         {
@@ -34,7 +37,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
-
+    IEnumerator text()
+    {
+        yield return new WaitForSeconds(3);
+        NPCText.SetActive(false);
+        Debug.Log("bye bye text");
+    }
+    IEnumerator key()
+    {
+        yield return new WaitForSeconds(2);
+        Debug.Log("bye bye key");
+        keyDisplay.SetActive(false);
+    }
 
     // Update is called once per frame
     void Update()
@@ -52,16 +66,12 @@ public class PlayerController : MonoBehaviour
         //    {
         //        player moves down
         //        newPosition.y -= speed;
-
         //    }
-
         //    if (Input.GetKey("d"))
         //    {
         //        player moves right 
         //        newPosition.x += speed;
-
         //    }
-
         //    if (Input.GetKey("a"))
         //    {
         //        player moves left 
@@ -92,9 +102,12 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("indoor");
             transform.position = new Vector3(0.0f, 0.0f, 0.0f);
         }
-        else {
+        if (collision.gameObject.tag.Equals("Door") && hasKey == false)
+        {
             NPCText.SetActive(true);
+            StartCoroutine(text());
         }
+        
         if (collision.gameObject.tag.Equals("Key"))
         {
             Debug.Log("obtained key");
@@ -115,7 +128,11 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("Main");
             hasKey = false;
         }
-       
+        if (hasKey == true)
+        {
+            keyDisplay.SetActive(true);
+            StartCoroutine(key());
+        } 
     }
 
 }

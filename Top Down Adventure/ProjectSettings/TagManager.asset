@@ -9,6 +9,7 @@ TagManager:
   - Exit
   - NPCText
   - Chest
+  - keyImage
   layers:
   - Default
   - TransparentFX
