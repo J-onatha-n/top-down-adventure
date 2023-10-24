@@ -45,9 +45,10 @@ public class PlayerController : MonoBehaviour
     }
     IEnumerator key()
     {
+        keyDisplay.SetActive(true);
         yield return new WaitForSeconds(2);
         Debug.Log("bye bye key");
-        keyDisplay.SetActive(false);
+        Destroy(keyDisplay);
     }
 
     // Update is called once per frame
@@ -131,7 +132,7 @@ public class PlayerController : MonoBehaviour
         }
         if (hasKey == true)
         {
-            keyDisplay.SetActive(true);
+           // keyDisplay.SetActive(true);
             StartCoroutine(key());
             
         } 
