@@ -125,13 +125,15 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Exit"))
         {
             Debug.Log("exit");
-            SceneManager.LoadScene("Main");
+            SceneManager.LoadScene("Start");
             hasKey = false;
+            Destroy(gameObject);
         }
         if (hasKey == true)
         {
             keyDisplay.SetActive(true);
             StartCoroutine(key());
+            
         } 
     }
 
