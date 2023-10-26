@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag.Equals("Exit"))
         {
             Debug.Log("exit");
-            SceneManager.LoadScene("Start");
+            SceneManager.LoadScene("End");
             hasKey = false;
             Destroy(gameObject);
         }
